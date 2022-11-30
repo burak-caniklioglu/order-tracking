@@ -2,9 +2,9 @@ import React from 'react';
 
 function Accepted() {
   return (
-    <div>
+    <main >
       <div>Adana</div>
-    </div>
+    </main>
   );
 }
 
