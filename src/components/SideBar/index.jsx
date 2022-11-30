@@ -2,9 +2,9 @@ import React from 'react';
 
 function SideBar() {
   return (
-    <>
-      <div></div>
-    </>
+    <aside>
+      <div>SideBar</div>
+    </aside>
   );
 }
 
