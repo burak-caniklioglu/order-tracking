@@ -6,7 +6,7 @@ import Settings from '../../constants/icons/settings';
 
 function MiniSideBar() {
   return (
-    <aside className="flex flex-col items-center h-[100vh] fixed bg-[#EDEDED] w-[85px] " >
+    <aside className="flex flex-col items-center h-[100vh] bg-[#EDEDED] w-[85px] " >
       <div className="m-[1rem] cursor-pointer">
         <Logo />
       </div>
