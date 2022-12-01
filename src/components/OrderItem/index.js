@@ -1,5 +1,5 @@
 import React from 'react';
-import Cube from '../../constants/icons/cube';
+import Printer from '../../constants/icons/printer';
 
 function OrderItem() {
   return (
@@ -43,17 +43,17 @@ function OrderItem() {
       </div>
 
       <div className="">
-        <div className="flex justify-between">
+        <div className="flex justify-between ">
           <div>
             <div className="order-header ">
-              Additional informaiton from customer
+              Additional information from customer
             </div>
             <div className="order-answer">
-              Please send salad and green c hantni with 2 paper dish.
+              Please send salad and green chantni with 2 paper dish.
             </div>
           </div>
           <div className="flex items-end">
-            <div className='mr-10'><Cube /></div>
+            <div className='mr-10'><Printer /></div>
             <div className="primary flex items-center px-4 py-2 font-semibold">
               Move to Cooking
             </div>
