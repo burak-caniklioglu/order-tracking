@@ -13,7 +13,7 @@ function OrderArea() {
       </div>
 
       <div className="flex justify-between mb-[28px] ">
-        <div className="secondary">
+        <div className="secondary text-sm sm:text-base">
           <div className="flex justify-center items-center p-2">
             <div className="cursor-pointer mx-[15px]">
               <div className="w-[1rem] rounded-sm bg-black h-[2px] mb-[3px]"></div>
@@ -25,7 +25,7 @@ function OrderArea() {
           </div>
         </div>
         <Link to="/createOrder">
-          <div className="primary flex items-center px-4 py-2 font-semibold">
+          <div className="primary flex items-center px-4 py-2 font-semibold text-sm sm:text-base">
             Add New Order
           </div>
         </Link>

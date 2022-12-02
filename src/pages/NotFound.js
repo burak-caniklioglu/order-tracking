@@ -1,17 +1,18 @@
 import React from 'react';
 import MiniSideBar from '../components/miniSideBar';
 import SideBar from '../components/SideBar';
+import SubHeader from '../components/subHeader';
 
 function NotFound() {
   return (
     <main className="flex w-full ">
-      <div className="fixed flex">
+      <div className="hidden lg:fixed lg:flex">
         <MiniSideBar />
         <SideBar />
       </div>
 
-      <div className="ml-[394px] basis-full">
-        <div>Not found</div>
+      <div className="lg:ml-[394px] basis-full">
+        <SubHeader>Not found</SubHeader>
       </div>
     </main>
   );

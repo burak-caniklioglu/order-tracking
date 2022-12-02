@@ -93,7 +93,7 @@ function CreateForm() {
                   {...register('name', {
                     required: 'Please enter name',
                   })}
-                  onChange = {(e) => setControl(e.target.value)}
+                  onChange={(e) => setControl(e.target.value)}
                   className="w-full mt-[8px] rounded-md p-3 outline-none border border-[#CCCCCC]"
                 />
                 {errors.name && (
@@ -149,6 +149,7 @@ function CreateForm() {
                   Message to client
                 </label>
                 <textarea
+                  maxLength="60"
                   type="text"
                   id="message"
                   {...register('message')}
