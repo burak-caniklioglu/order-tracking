@@ -3,7 +3,6 @@ import Printer from '../../constants/icons/printer';
 import propTypes from 'prop-types';
 
 function OrderItem({ item }) {
-  console.log(item);
   return (
     <div className="border-[1.5px] rounded-md px-[43px] py-[1rem] my-[10px]">
       <div className="grid  gap-5 grid-temp">

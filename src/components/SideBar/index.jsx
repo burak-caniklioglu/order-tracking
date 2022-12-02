@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function SideBar() {
-
+  const order = useSelector((state) => state.order);
   const [subHeader, setSubHeader] = useState({
     objects: [
       { name: 'New Order', count: 0 },
-      { name: 'Accepted', count: 3 },
+      { name: 'Accepted', count: order.length },
       { name: 'Cooking', count: 3 },
       { name: 'Parcel Ready', count: 3 },
       { name: 'Delivered', count: 3 },
       { name: 'Completed', count: 3 },
     ],
-    activeObject: { name: 'Accepted', count: 3 },
+    activeObject:
+      window.location.pathname === '/createOrder'
+        ? { name: 'New Order', count: 0 }
+        : { name: 'Accepted', count: order.length },
   });
 
-  // const navigate = useNavigate();
 
-  const toggleActive = async (index) => {
+  const navigate = useNavigate();
+
+  const toggleActive = (index) => {
     setSubHeader({ ...subHeader, activeObject: subHeader.objects[index] });
   };
 
-  const toogleActiveStyle = (index) => {
-    if (subHeader.activeObject.name === subHeader.objects[index].name) {
-      return 'text-[18px] mb-[27px] font-semibold cursor-pointer text-[#2A71FA]';
-    } else {
-      return 'text-[18px] mb-[27px] font-semibold cursor-pointer ';
-    }
+  const handleClick = (index) => {
+    toggleActive(index);
   };
 
   return (
@@ -40,9 +41,14 @@ function SideBar() {
         {subHeader.objects.map((item, index) => (
           <div key={index} className="flex justify-between">
             <div
-              className={toogleActiveStyle(index)}
+              className="text-[18px] mb-[27px] font-semibold cursor-pointer "
+              style={{
+                color: subHeader.activeObject.name === item.name && '#2A71FA',
+              }}
               onClick={() => {
-                toggleActive(index);
+                handleClick(index);
+                item.name === 'Accepted' && navigate('/');
+                item.name === 'New Order' && navigate('/createOrder');
               }}
             >
               {item.name}
