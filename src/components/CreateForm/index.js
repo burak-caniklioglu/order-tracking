@@ -5,12 +5,16 @@ import data from '../../utils/data';
 import Arrow from '../../constants/icons/arrow';
 import { useNavigate } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '../Checkbox';
 import CartTemp from '../CartTemp';
+import moment from 'moment/moment';
+import { addToOrder } from '../../features/orderSlice';
 
 function CreateForm() {
   const { meals } = data;
+  const randomID = Math.floor(Math.random() * 1000000);
+  const date = moment().format('DD/MM/YYYY [ at ] hh:mm a');
   const [transType, setTransType] = useState('Delivery');
   const [isOpen, setIsOpen] = useState(false);
   const {
@@ -22,9 +26,25 @@ function CreateForm() {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const dispatch = useDispatch();
 
-  const submitHandler = ({ name, contact, message, transType, Foods }) => {
-    console.log(name, contact, message, transType, Foods);
+  const submitHandler = ({ name, contact, message, transType,  }) => {
+
+    const orderItem = {
+      name,
+      contact,
+      message,
+      transType,
+      orderItems: cartItems,
+      date:date,
+      id:randomID
+			
+    };
+
+    dispatch(addToOrder(orderItem));
+
+    navigate('/');
+
   };
   return (
     <div className="p-[32px]">
@@ -48,11 +68,11 @@ function CreateForm() {
               <tbody>
                 <tr className="h-[35px] ">
                   <td className="order-answer ">Order Number:</td>
-                  <td className="order-header ">#988123</td>
+                  <td className="order-header ">#{randomID}</td>
                 </tr>
                 <tr>
                   <td className="order-answer ">Date & Time:</td>
-                  <td className="order-header ">01/01/2020 at 3:27Pm</td>
+                  <td className="order-header ">{date}</td>
                 </tr>
               </tbody>
             </table>

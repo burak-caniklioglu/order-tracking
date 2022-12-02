@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import OrderItem from '../OrderItem';
 import SubHeader from '../subHeader';
 
 function OrderArea() {
+  const order = useSelector((state) => state.order);
   return (
     <div className="p-[32px]">
       <div className="flex">
@@ -19,7 +21,7 @@ function OrderArea() {
               <div className="w-[1rem] rounded-sm bg-black h-[2px] mt-[3px]"></div>
             </div>
 
-            <div className="font-semibold">Showing 10 Orders</div>
+            <div className="font-semibold">Showing {order.length} Orders</div>
           </div>
         </div>
         <Link to="/createOrder">
@@ -32,9 +34,9 @@ function OrderArea() {
         <hr />
       </div>
 
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
+      {order.map((item, i) => (
+        <OrderItem key={i} item={item} />
+      ))}
     </div>
   );
 }
