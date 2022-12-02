@@ -17,6 +17,7 @@ function CreateForm() {
   const date = moment().format('DD/MM/YYYY [ at ] hh:mm a');
   const [transType, setTransType] = useState('Delivery');
   const [isOpen, setIsOpen] = useState(false);
+  const [control, setControl] = useState('');
   const {
     handleSubmit,
     register,
@@ -28,7 +29,10 @@ function CreateForm() {
   const { cartItems } = cart;
   const dispatch = useDispatch();
 
-  const submitHandler = ({ name, contact, message, transType,  }) => {
+  const submitHandler = ({ name, contact, message, transType }) => {
+    if (cartItems.length === 0) {
+      return alert('Please add one least meal');
+    }
 
     const orderItem = {
       name,
@@ -36,16 +40,15 @@ function CreateForm() {
       message,
       transType,
       orderItems: cartItems,
-      date:date,
-      id:randomID
-			
+      date: date,
+      id: randomID,
     };
 
     dispatch(addToOrder(orderItem));
 
     navigate('/');
-
   };
+
   return (
     <div className="p-[32px]">
       <div className="flex">
@@ -90,6 +93,7 @@ function CreateForm() {
                   {...register('name', {
                     required: 'Please enter name',
                   })}
+                  onChange = {(e) => setControl(e.target.value)}
                   className="w-full mt-[8px] rounded-md p-3 outline-none border border-[#CCCCCC]"
                 />
                 {errors.name && (
@@ -151,9 +155,6 @@ function CreateForm() {
                   className="w-full resize-none rounded-md outline-none p-3 h-[141px] border  border-[#CCCCCC]"
                   rows="3"
                 ></textarea>
-                {errors.message && (
-                  <div className="text-red-500">{errors.message.message}</div>
-                )}
               </div>
 
               <div>
@@ -239,15 +240,19 @@ function CreateForm() {
 
           <div className=" ml-[5%]">
             <div className="flex justify-end ">
-              <button
-                onClick={() => navigate('/')}
-                className=" w-1/2 flex justify-center text-[17px] text-[#737376] py-[20px] border border-[#CCCCCC] rounded-md"
-              >
-                Cancel
-              </button>
+              {control && (
+                <button
+                  onClick={() => navigate('/')}
+                  className=" w-1/2 flex justify-center text-[17px] text-[#737376] py-[20px] border border-[#CCCCCC] rounded-md"
+                >
+                  Cancel
+                </button>
+              )}
+
               <button
                 type="submit"
                 className="bg-[#2A71FA] w-1/2 ml-4 flex justify-center text-[17px] text-[#FFF] py-[20px] border rounded-md"
+                style={{ backgroundColor: control && '#0DC74E' }}
               >
                 Add Order
               </button>
