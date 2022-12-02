@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import SubHeader from '../subHeader';
 import { useForm } from 'react-hook-form';
+import data from '../../utils/data';
 import Arrow from '../../constants/icons/arrow';
-import Cancel from '../../constants/icons/cancel';
+import { useNavigate } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
+import Checkbox from '../Checkbox';
+import CartTemp from '../CartTemp';
 
 function CreateForm() {
+  const { meals } = data;
   const [transType, setTransType] = useState('Delivery');
   const [isOpen, setIsOpen] = useState(false);
   const {
@@ -13,8 +19,12 @@ function CreateForm() {
     formState: { errors },
   } = useForm();
 
-  const submitHandler = async ({ name }) => {
-    console.log(name);
+  const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  const submitHandler = ({ name, contact, message, transType, Foods }) => {
+    console.log(name, contact, message, transType, Foods);
   };
   return (
     <div className="p-[32px]">
@@ -22,7 +32,7 @@ function CreateForm() {
         <SubHeader>Create Order</SubHeader>
       </div>
 
-      <div className=" flex gap-4">
+      <form className=" flex gap-4" onSubmit={handleSubmit(submitHandler)}>
         <div
           className="w-1/2 border-r
 				 border-[#EBEBEB] "
@@ -49,7 +59,7 @@ function CreateForm() {
           </div>
 
           <div className="w-[97%] ">
-            <form onSubmit={handleSubmit(submitHandler)}>
+            <div>
               <div className="mt-[32px]">
                 <label className="order-answer" htmlFor="name">
                   Name
@@ -57,9 +67,8 @@ function CreateForm() {
                 <input
                   type="text"
                   id="name"
-                  autoFocus
                   {...register('name', {
-                    required: 'Lütfen isim ve soyisminizi giriniz',
+                    required: 'Please enter name',
                   })}
                   className="w-full mt-[8px] rounded-md p-3 outline-none border border-[#CCCCCC]"
                 />
@@ -74,9 +83,8 @@ function CreateForm() {
                 <input
                   type="text"
                   id="contact"
-                  autoFocus
                   {...register('contact', {
-                    required: 'Lütfen isim ve soyisminizi giriniz',
+                    required: 'Please enter your phone number',
                   })}
                   className="w-full mt-[8px] rounded-md p-3 outline-none border border-[#CCCCCC]"
                 />
@@ -96,12 +104,17 @@ function CreateForm() {
                         type="radio"
                         name="transMethod"
                         id={item}
-                        value="delivery"
+                        value={item}
                         className="mr-[8px] text-[#171719]"
+                        {...register('transType', {
+                          required: 'Please select at least one',
+                        })}
                         checked={transType === item}
                         onChange={() => setTransType(item)}
                       />
-                      <label htmlFor={item}>{item}</label>
+                      <label className="cursor-pointer" htmlFor={item}>
+                        {item}
+                      </label>
                     </div>
                   ))}
                 </div>
@@ -127,9 +140,15 @@ function CreateForm() {
                 <div className="text-[#171719] mb-[13px]">Order Items</div>
 
                 <div className="" onClick={() => setIsOpen(!isOpen)}>
-                  <div className="border rounded-md border-[#CCCCCC] h-[50px] flex items-center  justify-between px-4 mb-[3px]">
-                    <div className="order-header"> Pending</div>
-                    <div>
+                  <div className="border rounded-md border-[#CCCCCC] min-h-[50px] flex items-center  justify-between px-4 mb-[3px]">
+                    <div className="order-header">
+                      {isOpen
+                        ? cartItems.map((item, i) => (
+                          <span key={i}>{item.name}, </span>
+                        ))
+                        : 'Pending'}
+                    </div>
+                    <div className="cursor-pointer">
                       <Arrow />
                     </div>
                   </div>
@@ -137,64 +156,19 @@ function CreateForm() {
 
                 {isOpen ? (
                   <div className="w-full h-[333px] border rounded-sm border-[#CCCCCC] p-[20px] overflow-y-scroll mt-[-3px]">
-                    {[
-                      'Beef Stroganoff',
-                      'Reuben',
-                      'Sandwich',
-                      'Waldorf Salad',
-                      'French Fries',
-                      'Caesar Salad',
-                      'Chicken a la King',
-                      'Lobster, Newburg',
-                      'Salisbury Steak',
-                      'Kebab',
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center mb-[12px]">
-                        <input
-                          type="checkbox"
-                          name="transMethod"
-                          id={item}
-                          value="delivery"
-                          className="mr-[8px] text-[#171719]"
-                        />
-                        <label htmlFor={item}>{item}</label>
-                      </div>
+                    {meals.map((item, i) => (
+                      <Checkbox key={i} item={item} />
                     ))}
                   </div>
                 ) : (
                   <>
-                    <div className=" flex justify-between my-[21px]">
-                      <div>Beef Stroganoff</div>
-                      <div className="flex justify-center items-center">
-                        <div>29$</div>
-                        <div className="flex justify-between items-center w-[69px] ml-[46px] px-2 border border-[#0B69FF] rounded-xl">
-                          <div className="order-header">-</div>
-                          <div>1</div>
-                          <div className="order-header">+</div>
-                        </div>
-                        <div className="ml-[30px]">
-                          <Cancel />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between my-[21px]">
-                      <div>Beef Stroganoff</div>
-                      <div className="flex justify-center items-center">
-                        <div>29$</div>
-                        <div className="flex justify-between items-center w-[69px] ml-[46px] px-2 border border-[#0B69FF] rounded-xl">
-                          <div className="order-header">-</div>
-                          <div>1</div>
-                          <div className="order-header">+</div>
-                        </div>
-                        <div className="ml-[30px]">
-                          <Cancel />
-                        </div>
-                      </div>
-                    </div>
+                    {cartItems.map((item, i) => (
+                      <CartTemp key={i} item={item} />
+                    ))}
                   </>
                 )}
               </div>
-            </form>
+            </div>
           </div>
         </div>
 
@@ -204,45 +178,63 @@ function CreateForm() {
               Delivery Details
             </div>
             <table className="w-full">
-              <tr className=" h-[28px] ">
-                <td className="order-header w-[44%]">Order Items</td>
-                <td className="order-header w-[44%]">Number</td>
-                <td className="order-header ">Cost</td>
-              </tr>
+              <tbody>
+                <tr className=" h-[28px] ">
+                  <td className="order-header w-[44%]">Order Items</td>
+                  <td className="order-header w-[44%]">Number</td>
+                  <td className="order-header ">Cost</td>
+                </tr>
 
-              <tr className="h-[28px] ">
-                <td className="order-answer w-[44%]">Beef Stroganoff</td>
-                <td className="order-answer w-[44%]">1</td>
-                <td className="order-answer ">29$</td>
-              </tr>
-              <tr className="h-[28px] ">
-                <td className="order-answer w-[44%]">Beef Stroganoff</td>
-                <td className="order-answer w-[44%]">1</td>
-                <td className="order-answer ">29$</td>
-              </tr>
-              <tr className="h-[28px] ">
-                <td className="order-answer w-[44%]">Beef Stroganoff</td>
-                <td className="order-answer w-[44%]">1</td>
-                <td className="order-answer ">29$</td>
-              </tr>
+                {cartItems.length > 0 ? (
+                  cartItems.map((item) => (
+                    <tr key={item.id} className="h-[28px] ">
+                      <td className="order-answer w-[44%]">{item.name}</td>
+                      <td className="order-answer w-[44%]">
+                        {item.cartQuantity}
+                      </td>
+                      <td className="order-answer ">
+                        {item.price * item.cartQuantity}$
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr className="h-[28px] ">
+                    <td className="order-answer w-[44%]">-</td>
+                    <td className="order-answer w-[44%]">-</td>
+                    <td className="order-answer ">-</td>
+                  </tr>
+                )}
+              </tbody>
             </table>
           </div>
 
           <div className="bg-[#F6F6F6] ml-[5%] px-[5%] py-4 mb-[32px] rounded-md">
             <div className="flex justify-between">
               <div className="text-[24px]">Total Amount:</div>
-              <div className="mr-[6%] text-[24px]">84$</div>
+              <div className="mr-[6%] text-[24px]">
+                {cartItems.reduce((a, c) => a + c.cartQuantity * c.price, 0)}$
+              </div>
             </div>
           </div>
 
           <div className=" ml-[5%]">
             <div className="flex justify-end ">
-              <div className=" w-1/2 flex justify-center text-[17px] text-[#737376] py-[20px] border border-[#CCCCCC] rounded-md">Cancel</div>
-              <div className="bg-[#2A71FA] w-1/2 ml-4 flex justify-center text-[17px] text-[#FFF] py-[20px] border rounded-md">Add Order</div>
+              <button
+                onClick={() => navigate('/')}
+                className=" w-1/2 flex justify-center text-[17px] text-[#737376] py-[20px] border border-[#CCCCCC] rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="bg-[#2A71FA] w-1/2 ml-4 flex justify-center text-[17px] text-[#FFF] py-[20px] border rounded-md"
+              >
+                Add Order
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
