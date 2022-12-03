@@ -51,7 +51,7 @@ function OrderItem({ item }) {
             <div className="order-header text-sm sm:text-[17px] ">
               Additional information from customer
             </div>
-            <textarea className="order-answer text-sm sm:text-[18px] w-full overflow-hidden resize-none mb-4 md:mb-0">
+            <textarea disabled className="order-answer text-sm sm:text-[18px] w-full overflow-hidden resize-none mb-4 md:mb-0">
               {item.message}
             </textarea>
           </div>
