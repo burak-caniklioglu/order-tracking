@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import SubHeader from '../subHeader';
 import { useForm } from 'react-hook-form';
 import data from '../../utils/data';
@@ -10,10 +10,14 @@ import Checkbox from '../Checkbox';
 import CartTemp from '../CartTemp';
 import moment from 'moment/moment';
 import { addToOrder } from '../../features/orderSlice';
+import { clearCart } from '../../features/cartSlice';
 
 function CreateForm() {
   const { meals } = data;
-  const randomID = Math.floor(Math.random() * 1000000);
+  const tempRandomID = () => {
+    return Math.floor(Math.random() * 1000000);
+  };
+  const randomID = useMemo(() => tempRandomID(), []);
   const date = moment().format('DD/MM/YYYY [ at ] hh:mm a');
   const [transType, setTransType] = useState('Delivery');
   const [isOpen, setIsOpen] = useState(false);
@@ -46,16 +50,21 @@ function CreateForm() {
 
     dispatch(addToOrder(orderItem));
 
+    dispatch(clearCart());
+
     navigate('/');
   };
 
   return (
-    <div className="p-[32px]" >
+    <div className="p-[32px]">
       <div className="flex">
         <SubHeader>Create Order</SubHeader>
       </div>
 
-      <form className=" flex flex-col md:flex-row  gap-4" onSubmit={handleSubmit(submitHandler)}>
+      <form
+        className=" flex flex-col md:flex-row  gap-4"
+        onSubmit={handleSubmit(submitHandler)}
+      >
         <div
           className="w-full md:w-1/2 md:border-r
 				 border-[#EBEBEB] "
@@ -92,12 +101,15 @@ function CreateForm() {
                   id="name"
                   {...register('name', {
                     required: 'Please enter name',
+                    onChange:(e) => setControl(e.target.value)
                   })}
-                  onChange={(e) => setControl(e.target.value)}
+                  
                   className="w-full mt-[8px] rounded-md p-3 outline-none border border-[#CCCCCC]"
                 />
                 {errors.name && (
-                  <div className="text-red-500">{errors.name.message}</div>
+                  <div className="text-red-500">{errors.name.message}
+                    {console.log(errors.name)}</div>
+									
                 )}
               </div>
               <div className="mt-[32px]">
@@ -234,7 +246,19 @@ function CreateForm() {
             <div className="flex justify-between">
               <div className="text-[24px]">Total Amount:</div>
               <div className="mr-[6%] text-[24px]">
-                {cartItems.reduce((a, c) => a + c.cartQuantity * c.price, 0)}$
+                {cartItems.length > 0 ? (
+                  <>
+                    <span>
+                      {cartItems.reduce(
+                        (a, c) => a + c.cartQuantity * c.price,
+                        0,
+                      )}
+                    </span>
+                    <span>$</span>
+                  </>
+                ) : (
+                  <span>-</span>
+                )}
               </div>
             </div>
           </div>

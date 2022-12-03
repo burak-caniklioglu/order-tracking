@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Cookies from 'js-cookie';
 
-const initialState = Cookies.get('orderItems')
-  ? JSON.parse(Cookies.get('orderItems'))
+
+const initialState = localStorage.getItem('orderItems')
+  ? JSON.parse(localStorage.getItem('orderItems'))
   : [];
 
 const orderSlice = createSlice({
@@ -11,7 +11,7 @@ const orderSlice = createSlice({
   reducers: {
     addToOrder(state, action) {
       state = [ action.payload,...state,];
-      Cookies.set('orderItems', JSON.stringify(state));
+      localStorage.setItem('orderItems', JSON.stringify(state));
       return state;
     },
   },

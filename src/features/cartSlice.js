@@ -59,9 +59,13 @@ const cartSlice = createSlice({
         return state;
       });
     },
+    clearCart(state) {
+      state.cartItems = [];
+      Cookies.set('cartItems', JSON.stringify(state.cartItems));
+    },
   },
 });
 
-export const { addToCart, decreaseCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, decreaseCart, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
