@@ -39,7 +39,7 @@ function NotFound() {
             <SideBar />
           </div>
 
-          <div className="ml-[394px] basis-full">
+          <div className=" basis-full">
             <SubHeader>Not Found Page</SubHeader>
           </div>
         </>
