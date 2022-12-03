@@ -121,6 +121,7 @@ function CreateForm() {
                   id="contact"
                   {...register('contact', {
                     required: 'Please enter your phone number',
+                    onChange:(e) => setControl(e.target.value)
                   })}
                   className="w-full mt-[8px] rounded-md p-3 outline-none border border-[#CCCCCC]"
                 />
@@ -164,7 +165,9 @@ function CreateForm() {
                   maxLength="60"
                   type="text"
                   id="message"
-                  {...register('message')}
+                  {...register('message',{
+                    onChange:(e) => setControl(e.target.value)
+                  })}
                   className="w-full resize-none rounded-md outline-none p-3 h-[141px] border  border-[#CCCCCC]"
                   rows="3"
                 ></textarea>
@@ -265,9 +268,10 @@ function CreateForm() {
 
           <div className=" md:ml-[5%]">
             <div className="flex justify-end ">
-              {control && (
+              {control  && (
                 <button
-                  onClick={() => navigate('/')}
+                  onClick={() => {navigate('/');
+                    dispatch(clearCart());}}
                   className=" w-1/2 flex justify-center text-[17px] text-[#737376] py-[20px] border border-[#CCCCCC] rounded-md"
                 >
                   Cancel
@@ -277,7 +281,7 @@ function CreateForm() {
               <button
                 type="submit"
                 className="bg-[#2A71FA] w-1/2 ml-4 flex justify-center text-[17px] text-[#FFF] py-[20px] border rounded-md"
-                style={{ backgroundColor: control && '#0DC74E' }}
+                style={{ backgroundColor: control  && '#0DC74E' }}
               >
                 Add Order
               </button>
