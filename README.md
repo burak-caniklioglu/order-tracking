@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+<div align='center'>
+    <div>
+        <img src='./src/constants/images/goart.jpg' alt='coino-logo' width='200px' />
+    </div>
+    <br/>
+    <br/>
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Recruitment project given by Go Art Metaverse Company
 
-## Available Scripts
+You can access the live demo from the link here: [ <b> Live Demo</b> ](https://brk-order-tracking.netlify.app/) 
 
-In the project directory, you can run:
 
-### `npm start`
+## Content
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [About](#about)
+- [Used Packages And Modules](#used-packages-and-modules)
+- [Installation](#installation)
+- [Previews](#previews)
+- [App Performance](#app-performance)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# About
+- The Order-Tracking Project is an order tracking application and offers its users an experience to create a new order and display the created order so that the most recent order is sorted first.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Used Packages And Modules
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React JS
+- React-redux
+- Redux-Toolkit
+- Js-cookie
+- Eslint
+- Tailwind
+- Moment
+- React-hook-form
+- Prettier
+- Netlify
+- Cypress
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Installation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- First, clone the project:
 
-## Learn More
+```
+git clone https://github.com/burak-caniklioglu/ikinci-el-project.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Then, start the project on localhost:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+# install dependencies with npm
+npm install
+# or install dependencies with yarn
+yarn install
 
-### Code Splitting
+# serve at localhost:3000
+npm start or yarn start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+# test
+While your server is running, open another terminal and type
+yarn run cypress open
+'click' order-tracking-ChangePage.cy.js
+```
+# Previews
 
-### Analyzing the Bundle Size
+<center>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Web - Main Page
 
-### Making a Progressive Web App
+<img src='previews/main-page.PNG' />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br>
+<br>
 
-### Advanced Configuration
+## Web - Form Page Empty
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<img src='previews/form-page-empty.PNG' />
 
-### Deployment
+<br>
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Web - Form Page Full
 
-### `npm run build` fails to minify
+<img src='previews/form-page-full.PNG' />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br>
+<br>
+
+## Mobile
+
+<p align="center">
+    <img src="previews/main-mobile-side.png" alt="mobile-prew" width="220"/>
+    <img src="previews/main-mobile.png" alt="mobile-prew" width="220"/>
+    <img src="previews/form-mobile.png" alt="mobile-prew" width="220"/>
+</p>
+</center>
+
+# App Performance
+
+## Web
+
+<p align="center">
+
+  <img src="previews/desktop-perf.PNG" alt="mobile-prew" width="660"/>
+</p>
+
+## Mobile
+
+<p align="center">
+
+  <img src="previews/mobile-perf.PNG" alt="mobile-prew" width="660"/>
+</p>

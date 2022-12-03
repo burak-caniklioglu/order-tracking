@@ -76,10 +76,10 @@ function CreateForm() {
               }
             }
           >
-            <table className="w-1/2 ">
+            <table className=" ">
               <tbody>
-                <tr className="h-[35px] ">
-                  <td className="order-answer ">Order Number:</td>
+                <tr className="h-[35px]  ">
+                  <td className="order-answer sm:pr-[59px]">Order Number:</td>
                   <td className="order-header ">#{randomID}</td>
                 </tr>
                 <tr>
