@@ -20,11 +20,11 @@ function OrderItem({ item }) {
         </div>
         <div>
           <div className="order-header text-sm sm:text-[17px] ">Contact</div>
-          <div className="order-answer text-sm sm:text-[18px]">{item.contact}</div>
+          <div className="order-answer text-sm sm:text-[18px]" >{item.contact}</div>
         </div>
         <div>
           <div className="order-header text-sm sm:text-[17px] ">Trans Type</div>
-          <div className="order-answer text-sm sm:text-[18px]">{item.transType}</div>
+          <div className="order-answer text-sm sm:text-[18px]" ><span className='rounded-sm px-1 text-white' style={{backgroundColor: item.transType === 'Takeaway' ? '#FC7501' : '#2A71FA'}}>{item.transType}</span> </div>
         </div>
         <div>
           <div className="order-header text-sm sm:text-[17px] ">Amount</div>

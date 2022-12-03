@@ -50,14 +50,14 @@ function CreateForm() {
   };
 
   return (
-    <div className="p-[32px]">
+    <div className="p-[32px]" >
       <div className="flex">
         <SubHeader>Create Order</SubHeader>
       </div>
 
-      <form className=" flex gap-4" onSubmit={handleSubmit(submitHandler)}>
+      <form className=" flex flex-col md:flex-row  gap-4" onSubmit={handleSubmit(submitHandler)}>
         <div
-          className="w-1/2 border-r
+          className="w-full md:w-1/2 md:border-r
 				 border-[#EBEBEB] "
         >
           <div
@@ -194,8 +194,8 @@ function CreateForm() {
           </div>
         </div>
 
-        <div className=" w-1/2">
-          <div className="bg-[#F6F6F6] ml-[5%] px-[5%] py-[26px] rounded-md mb-[24px]">
+        <div className=" w-full md:w-1/2">
+          <div className="bg-[#F6F6F6] md:ml-[5%] px-[5%] py-[26px] rounded-md mb-[24px]">
             <div className="order-answer font-[600] mb-[29px]">
               Delivery Details
             </div>
@@ -230,7 +230,7 @@ function CreateForm() {
             </table>
           </div>
 
-          <div className="bg-[#F6F6F6] ml-[5%] px-[5%] py-4 mb-[32px] rounded-md">
+          <div className="bg-[#F6F6F6] md:ml-[5%] px-[5%] py-4 mb-[32px] rounded-md">
             <div className="flex justify-between">
               <div className="text-[24px]">Total Amount:</div>
               <div className="mr-[6%] text-[24px]">
@@ -239,7 +239,7 @@ function CreateForm() {
             </div>
           </div>
 
-          <div className=" ml-[5%]">
+          <div className=" md:ml-[5%]">
             <div className="flex justify-end ">
               {control && (
                 <button

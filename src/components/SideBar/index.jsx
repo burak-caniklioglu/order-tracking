@@ -32,7 +32,7 @@ function SideBar() {
 
   return (
     <aside
-      className="bg-[#F6F6F6] w-[309px] h-[100vh] border
+      className="bg-[#F6F6F6] w-[200px] md:w-[309px] h-[100vh] border
 		border-[#CCCCCC]"
     >
       <div className="px-[29px] mt-[1rem]">
